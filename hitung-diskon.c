@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdbool.h>
 // Hitung harga setelah diskon. Diskon dihitung berdasarkan total harga belanja
 float getDiscount(int price)
 {
@@ -50,9 +50,10 @@ int main()
     float transactionDiscount = 0, loyaltyDiscount = 0, priceAfterDiscount = 0;
     // Persentase diskon jika user melakukan transaksi minimal 4x dalam satu bulan
     int discount20 = 20;
-
+    // Buat variabel untuk menyimpan apakah user masih ingin input transaksi
+    bool inputAgain = true;
     // Perulangan untuk meminta input user
-    while (1)
+    while (inputAgain == true)
     {
         int nominal;
         printf("Masukkan nilai total belanja (rupiah): ");
@@ -66,16 +67,30 @@ int main()
         // Jumlah transaksi user dalam satu bulan bertambah 1
         totalTransaction++;
 
-        char isContinue;
-        // Tanya ke user apakah ingin menginput data transaksi lagi
-        printf("Belanja lagi? (Y/N) ");
-        scanf("%c", &isContinue);
-        // Bersihkan buffer input
-        getchar();
-        // Jika user tidak ingin menginput data transaksi lagi, maka kita hentikan loopnya
-        if (isContinue == 'n' || isContinue == 'N')
+        while (1)
         {
-            break;
+            char isContinue;
+            // Tanya ke user apakah ingin menginput data transaksi lagi
+            printf("Belanja lagi? (Y/N) ");
+            scanf("%c", &isContinue);
+            // Bersihkan buffer input
+            getchar();
+            // Jika user tidak ingin menginput data transaksi lagi, maka kita hentikan loopnya
+            if (isContinue == 'n' || isContinue == 'N')
+            {
+                inputAgain = false;
+                break;
+            }
+            // Jika user masih ingin input transaksi lagi
+            else if (isContinue == 'Y' || isContinue == 'y')
+            {
+                break;
+            }
+            // Jika user input character lain selain huruf y / n
+            else
+            {
+                printf("Tolong masukkan 'y' jika ingin melanjutkan transaksi dan 'n' jika ingin berhenti input transaksi\n");
+            }
         }
     }
 
