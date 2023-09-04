@@ -61,6 +61,8 @@ int main()
         getchar();
         // Menambahkan harga yang diinput oleh user ke total nominal harga
         totalPrice += nominal;
+        // Hitung nilai diskon berdasarkan total belanja
+        transactionDiscount += getDiscount(nominal);
         // Jumlah transaksi user dalam satu bulan bertambah 1
         totalTransaction++;
 
@@ -77,15 +79,15 @@ int main()
         }
     }
 
-    // Hitung nilai diskon berdasarkan total belanja
-    transactionDiscount = getDiscount(totalPrice);
+    // Hitung harga setelah diskon berdasarkan nominal transaksi
+    priceAfterDiscount = (float)totalPrice - transactionDiscount;
     // Jika jumlah transaksi dalam satu bulan 4 atau lebih maka akan mendapatkan diskon tambahan yaitu 20% dari total harga
     if (totalTransaction >= 4)
     {
-        loyaltyDiscount = (float)totalPrice * discount20 / 100;
+        loyaltyDiscount = (float)priceAfterDiscount * discount20 / 100;
     }
     // Hitung harga setelah diskon
-    priceAfterDiscount = (float)totalPrice - (transactionDiscount + loyaltyDiscount);
+    priceAfterDiscount -= loyaltyDiscount;
 
     // Menampilkan hasil ke user
     printf("\n\nHarga akhir : Rp. %.2f\n\n", priceAfterDiscount);
