@@ -7,7 +7,7 @@ float getDiscount(int price)
     buat variabel dengan tipe data float dengan nilai diambil dari parameter price .
     Kita perlu melakukan ini karena hasil perhitungan diskon bisa saja menghasilkan bilangan desimal
     */
-    float discount = 0;
+    int discount = 0;
 
     // Diskon 10 %
     int discount10 = 10;
@@ -19,19 +19,19 @@ float getDiscount(int price)
     if (price >= 200000 && price <= 500000)
     {
         // set nilai discount dengan cara hitung 10% dari total belanja
-        discount = (float)price * discount10 / 100;
+        discount = price * discount10 / 100;
     }
     // Hitung harga setelah diskon jika total belanja antara Rp 500.000 sampai Rp 1.000.000
     else if (price > 500000 && price <= 1000000)
     {
         // set nilai discount dengan cara hitung 20% dari total belanja
-        discount = (float)price * discount20 / 100;
+        discount = price * discount20 / 100;
     }
     // Hitung harga setelah diskon jika total belanja lebih dari Rp 1.000.000
     else if (price > 1000000)
     {
         // set nilai discount dengan cara hitung 30% dari total belanja
-        discount = (float)price * discount30 / 100;
+        discount = price * discount30 / 100;
     }
 
     // Kembalikan nilai  diskon
@@ -47,7 +47,7 @@ int main()
     // Simpan nilai total harga dari input user dan menyimpan jumlah transaksi yang dilakukan user dalam satu bulan
     int totalPrice = 0, totalTransaction;
     // Simpan total diskon dari total belanja dan diskon dari jumlah transaksi
-    float transactionDiscount = 0, loyaltyDiscount = 0, priceAfterDiscount = 0;
+    int transactionDiscount = 0, loyaltyDiscount = 0, priceAfterDiscount = 0;
     // Persentase diskon jika user melakukan transaksi minimal 4x dalam satu bulan
     int discount20 = 20;
     // Buat variabel untuk menyimpan apakah user masih ingin input transaksi
@@ -95,25 +95,25 @@ int main()
     }
 
     // Hitung harga setelah diskon berdasarkan nominal transaksi
-    priceAfterDiscount = (float)totalPrice - transactionDiscount;
+    priceAfterDiscount = totalPrice - transactionDiscount;
     // Jika jumlah transaksi dalam satu bulan 4 atau lebih maka akan mendapatkan diskon tambahan yaitu 20% dari total harga
     if (totalTransaction >= 4)
     {
-        loyaltyDiscount = (float)priceAfterDiscount * discount20 / 100;
+        loyaltyDiscount = priceAfterDiscount * discount20 / 100;
     }
     // Hitung harga setelah diskon
     priceAfterDiscount -= loyaltyDiscount;
 
     // Menampilkan hasil ke user
-    printf("\n\nHarga akhir : Rp. %.2f\n\n", priceAfterDiscount);
+    printf("\n\nHarga akhir : Rp. %d\n\n", priceAfterDiscount);
     printf("---------------------------------------------\n");
     printf("Rekap Transaksi\n");
     printf("%-40s", "Total belanja");
-    printf(": Rp. %.2f\n", (float)totalPrice);
+    printf(": Rp. %d\n", totalPrice);
     printf("%-40s", "Diskon dari total belanja");
-    printf(": Rp. %.2f\n", transactionDiscount);
+    printf(": Rp. %d\n", transactionDiscount);
     printf("%-40s", "Diskon dari jumlah transaksi");
-    printf(": Rp. %.2f\n", loyaltyDiscount);
+    printf(": Rp. %d\n", loyaltyDiscount);
     printf("---------------------------------------------\n");
 
     return 0;
